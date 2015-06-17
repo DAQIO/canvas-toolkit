@@ -1,0 +1,28 @@
+{
+  "name" : "canvas-toolkit",
+  "version" : "0.0.1",
+  "description" : "Canvas Toolkit",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/DAQIO/canvas-toolkit.git"
+  },
+  "main" : "build/index.js",
+  "files" : ["build"],
+  "scripts" : {
+    "prepublish" : "gulp build"
+  },
+  "devDependencies" : {
+    "babelify" : "^6.1.2",
+    "gulp" : "^3.8.11",
+    "gulp-babel"  : "^5.1.0",
+    "gulp-util" : "^3.0.4",
+    "gulp-watch" : "^4.2.4",
+    "require-dir" : "^0.1.0",
+    "gulp-webserver" : "^0.9.1"
+  },
+  "dependencies" : {
+    "underscore" : "^1.8.2",
+    "wolfy87-eventemitter" : "^4.2.11",
+    "loglevel" : "^1.2.0"
+  }
+}
