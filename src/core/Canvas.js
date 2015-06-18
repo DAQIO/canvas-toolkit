@@ -8,9 +8,13 @@ class Canvas {
     this.container = container;
     this.defaultLayer = new Layer({width,height});
     this.container.appendChild(this.defaultLayer.canvasEl);
-    setInterval(() => {
+
+    const drawLoop = () => {
       this.defaultLayer.draw();
-    }, 16);
+      window.requestAnimationFrame(drawLoop);
+    };
+
+    window.requestAnimationFrame(drawLoop);    
   }
 
   add(element){

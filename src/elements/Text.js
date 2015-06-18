@@ -6,16 +6,12 @@ import {standardFont} from '../core/defaults';
 class Text extends CanvasElement {
 
   constructor(options){
-    super();
+    super(options);
     options = _.defaults(_.clone(options), {
-      left: 0,
-      top: 0,
       font: standardFont,
       color: '#000'
     });
     checkOptions(options, ['text']);
-    this.left = options.left;
-    this.top = options.top;
     this.font = options.font;
     this.text = options.text;
     this.color = options.color;
@@ -28,6 +24,33 @@ class Text extends CanvasElement {
     this.canvas.textAlign = 'left';
     this.canvas.textBaseline = 'top';
     this.canvas.fillText(this.text, this.left, this.top);
+  }
+
+  set font(font){
+    this._font = font;
+    this.isDirty = true;
+  }
+
+  get font(){
+    return this._font;
+  }
+
+  set text(content){
+    this._text = content;
+    this.isDirty = true;
+  }
+
+  get text() {
+    return this._text;
+  }
+
+  set color(color){
+    this._color = color;
+    this.isDirty = true;
+  }
+
+  get color(){
+    return this._color;
   }
 
 }

@@ -6,19 +6,52 @@
   <body>
     <div id="canvas"></div>
     <script>
-      window.addEventListener('load', function(){
+      function countRedrawTest(){
         var canvas = new CanvasToolkit.Canvas({
           width: 750,
           height: 500,
           container: document.querySelector("#canvas")
         });
-        // canvas.add(new CanvasToolkit.Line({}));
-        // canvas.add(new CanvasToolkit.Path({}));
-        // canvas.add(new CanvasToolkit.Rectangle({}));
-        canvas.add(new CanvasToolkit.Text({
-          text: 'Foobar'
-        }));
-        //canvas.add(new CanvasToolkit.Triangle({}));
+        var counter = new CanvasToolkit.Text({
+          text: 'Count: 0'
+        });
+        canvas.add(counter);
+        var count = 0;
+        setInterval(function(){
+          counter.text = 'Count: ' + (count++);
+        },10);
+      }
+
+      function multipleElementsTest(){
+        var canvas = new CanvasToolkit.Canvas({
+          width: 750,
+          height: 500,
+          container: document.querySelector('#canvas')
+        });
+        var c1 = new CanvasToolkit.Text({
+          text: 'Counter 1: 0',
+          left: 10,
+          top: 10
+        });
+        var c2 = new CanvasToolkit.Text({
+          text: 'Counter 2: 0',
+          left: 10,
+          top: 30
+        });
+        canvas.add(c1);
+        canvas.add(c2);
+        var count1 = 0;
+        var count2 = 0;
+        setInterval(function(){
+          c1.text = "Counter 1: " + (count1++);
+        }, 100);
+        setInterval(function(){
+          c2.text = "Counter 2: " + (count2++);
+        }, 10);
+      }
+
+      window.addEventListener('load', function(){
+        multipleElementsTest();
       });
     </script>
   </body>
