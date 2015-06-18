@@ -4,7 +4,7 @@
     <script src="bundle.js"></script>
   </head>
   <body>
-    <div id="canvas"></div>
+    <div id="canvas" style="border:1px solid black; float:left"></div>
     <script>
       function countRedrawTest(){
         var canvas = new CanvasToolkit.Canvas({
@@ -50,8 +50,63 @@
         }, 10);
       }
 
+      function lineTest(){
+        var canvas = new CanvasToolkit.Canvas({
+          width: 750,
+          height: 500,
+          container: document.querySelector("#canvas")
+        });
+        var backbone = new CanvasToolkit.Line({
+          top: 50,
+          left: -50,
+          x1: 0,
+          y1: 0,
+          x2: 0,
+          y2: 400,
+          color: '#a7c'
+        });
+        canvas.add(backbone);
+
+        var lines = [];
+        for(var i = 0; i < 100; i++){
+          lines.push(new CanvasToolkit.Line({
+            top: 50 + 400 * Math.random(),
+            left: -50,
+            x1: 0,
+            y1: 0,
+            x2: 0,
+            y2: 500
+          }));
+        }
+        for(var i =0 ; i < lines.length; i++){
+          lines[i].rotator = 0;
+          canvas.add(lines[i]);
+        }
+
+        setInterval(function(){
+          backbone.x1 = (backbone.x1 + 0.5) % (canvas.width + 100);
+          backbone.x2 = backbone.x1;
+          for(var i = 0; i < lines.length; i++){
+            var line = lines[i];
+            line.rotator += Math.random() * 0.02;
+            line.x1 = (line.x1 + 0.5) % (canvas.width + 100);
+            line.x2 = Math.cos(line.rotator) * 100 + line.x1;
+            line.y2 = Math.sin(line.rotator) * 100;
+          }
+        }, 10);
+        setInterval(function(){
+          for(var i = 0; i < lines.length; i++){
+            var line = lines[i];
+            var red = Math.round(Math.random() * 255);
+            var green = Math.round(Math.random() * 255);
+            var blue = Math.round(Math.random() * 255);
+            line.color = 'rgb('+red+','+green+','+blue+')';
+          }
+        },1000)
+      }
+
       window.addEventListener('load', function(){
-        multipleElementsTest();
+        lineTest();
       });
     </script>
   </body>

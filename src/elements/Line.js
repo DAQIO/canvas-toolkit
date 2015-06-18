@@ -1,17 +1,59 @@
 import CanvasElement from '../core/CanvasElement';
+import {checkOptions} from '../core/util';
 
 class Line extends CanvasElement {
 
   constructor(options){
-    super();
+    super(options);
+
+    checkOptions(options, ['x1','y1', 'x2', 'y2']);
+
     this.x1 = options.x1;
     this.y1 = options.y1;
     this.x2 = options.x2;
     this.y2 = options.y2;
+
     this.color = options.color || '#000';
     this.lineCap = options.lineCap || 'square';
     this.dashed = options.dashed || false;
     this.dashSpacing = options.dashSpacing || [10,5];
+    this.thickness = options.thickness || 1;
+  }
+
+  get x1(){
+    return this._x1;
+  }
+
+  set x1(x1){
+    this._x1 = x1;
+    this.isDirty = true;
+  }
+
+  get x2(){
+    return this._x2;
+  }
+
+  set x2(x2){
+    this._x2 = x2;
+    this.isDirty = true;
+  }
+
+  get y1(){
+    return this._y1;
+  }
+
+  set y1(y1){
+    this._y1 = y1;
+    this.isDirty = true;
+  }
+
+  get y2(){
+    return this._y2;
+  }
+
+  set y2(y2){
+    this._y2 = y2;
+    this.isDirty = true;
   }
 
   draw(){
@@ -24,11 +66,11 @@ class Line extends CanvasElement {
 
   _drawRegularLine(){
     this.canvas.beginPath();
-    this.canvas.lineWidth = this.height;
+    this.canvas.lineWidth = this.thickness;
     this.canvas.strokeStyle = this.color;
     this.canvas.lineCap = this.lineCap;
-    this.canvas.moveTo(this.x1, this.y1);
-    this.canvas.lineTo(this.x2, this.y2);
+    this.canvas.moveTo(this.x1 + this.left, this.y1 + this.top);
+    this.canvas.lineTo(this.x2 + this.left, this.y2 + this.top);
     this.canvas.stroke();
   }
 
