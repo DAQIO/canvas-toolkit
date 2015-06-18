@@ -6,12 +6,20 @@
   <body>
     <div id="canvas"></div>
     <script>
-      var canvas = new CanvasToolkit.Canvas(document.querySelector("#canvas"));
-      canvas.add(new CanvasToolkit.Line({}));
-      canvas.add(new CanvasToolkit.Path({}));
-      canvas.add(new CanvasToolkit.Rectangle({}));
-      canvas.add(new CanvasToolkit.Text({}));
-      canvas.add(new CanvasToolkit.Triangle({}));
+      window.addEventListener('load', function(){
+        var canvas = new CanvasToolkit.Canvas({
+          width: 750,
+          height: 500,
+          container: document.querySelector("#canvas")
+        });
+        // canvas.add(new CanvasToolkit.Line({}));
+        // canvas.add(new CanvasToolkit.Path({}));
+        // canvas.add(new CanvasToolkit.Rectangle({}));
+        canvas.add(new CanvasToolkit.Text({
+          text: 'Foobar'
+        }));
+        //canvas.add(new CanvasToolkit.Triangle({}));
+      });
     </script>
   </body>
 </html>
