@@ -1,8 +1,8 @@
-
+import CanvasElement from '../core/CanvasElement';
 
 class Triangle extends CanvasElement {
   constructor(options){
-    super(options);
+    super();
     this.color = options.color || '#000';
     this.inverted = options.inverted || false;
   }
@@ -20,3 +20,5 @@ class Triangle extends CanvasElement {
     this.canvas.fill();
   }
 }
+
+export default Triangle;

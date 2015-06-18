@@ -1,7 +1,9 @@
+import CanvasElement from '../core/CanvasElement';
 
 class Text extends CanvasElement {
 
   constructor(options){
+    super();
     this.left = options.left;
     this.top = options.top;
     this.font = options.font;
@@ -16,5 +18,7 @@ class Text extends CanvasElement {
     this.canvas.textAlign = 'center';
     this.canvas.fillText(this.text, this.left, this.top);
   }
-  
+
 }
+
+export default Text;

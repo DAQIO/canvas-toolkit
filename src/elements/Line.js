@@ -2,7 +2,7 @@ import CanvasElement from '../core/CanvasElement';
 
 class Line extends CanvasElement {
 
-  constructor(){
+  constructor(options){
     super();
     this.x1 = options.x1;
     this.y1 = options.y1;
@@ -11,7 +11,7 @@ class Line extends CanvasElement {
     this.color = options.color || '#000';
     this.lineCap = options.lineCap || 'square';
     this.dashed = options.dashed || false;
-    this.dashSpacing = optiosn.dashSpacing || [10,5];
+    this.dashSpacing = options.dashSpacing || [10,5];
   }
 
   draw(){
@@ -58,9 +58,9 @@ class Line extends CanvasElement {
     this.ctx.rotate(rot);
     this.ctx.beginPath();
     const dc = da.length;
-    const di = 0;
+    let di = 0;
     let draw = true;
-    let x = 0;
+    x = 0;
     while (len > x){
       x += da[di++ % dc];
       if (x > len){

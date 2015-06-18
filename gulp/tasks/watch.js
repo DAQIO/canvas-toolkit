@@ -3,24 +3,30 @@ var watch = require('gulp-watch');
 var gutil = require('gulp-util');
 var babel = require('gulp-babel');
 var webserver = require('gulp-webserver');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var fs = require('fs');
+
 
 gulp.task('watch', function(){
-  gulp.src('src/**/*.js')
-      .pipe(watch('src/**/*.js'))
-      .pipe(babel({
-        stage: 0,
-        optional:['runtime']
-      }).on('error', gutil.log))
-      .pipe(gulp.dest('./build/'))
-  gulp.src('src/**/*.html')
-      .pipe(watch('src/**/*.html'))
-      .pipe(gulp.dest('./build'))
-      .on('error', gutil.log);
+  function build(){
+    browserify('src/index.js', {debug:true})
+        .transform(babelify)
+        .bundle()
+        .on('error', gutil.log)
+        .pipe(fs.createWriteStream('./build/bundle.js'));
 
+    watch('src/**/*.html')
+        .pipe(gulp.dest('./build'))
+        .on('error', gutil.log);
+  }
+  build();
+  watch('src/**/*.js', build);
   gulp.src('./build/')
       .pipe(webserver({
         livereload: true,
         directoryListing: false,
         open: true
       }));
+
 });

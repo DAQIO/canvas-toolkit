@@ -18,7 +18,9 @@
     "gulp-util" : "^3.0.4",
     "gulp-watch" : "^4.2.4",
     "require-dir" : "^0.1.0",
-    "gulp-webserver" : "^0.9.1"
+    "gulp-webserver" : "^0.9.1",
+    "browserify" : "^10.2.4",
+    "babelify" : "^6.1.2"
   },
   "dependencies" : {
     "underscore" : "^1.8.2",

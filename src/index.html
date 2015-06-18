@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    <script src="bundle.js"></script>
+  </head>
   <body>
-    <div></div>
-    <div></div>
+    <div id="canvas"></div>
     <script>
-      
-
+      var canvas = new CanvasToolkit.Canvas(document.querySelector("#canvas"));
+      canvas.add(new CanvasToolkit.Line({}));
+      canvas.add(new CanvasToolkit.Path({}));
+      canvas.add(new CanvasToolkit.Rectangle({}));
+      canvas.add(new CanvasToolkit.Text({}));
+      canvas.add(new CanvasToolkit.Triangle({}));
     </script>
   </body>
 </html>

@@ -1,7 +1,8 @@
-import CanvasElement from './CanvasElement';
+import CanvasElement from '../core/CanvasElement';
 
 class Rectangle extends CanvasElement {
   constructor(options){
+    super();
     this.left = options.left;
     this.top = options.top;
     this.width = options.width;
@@ -31,3 +32,5 @@ class Rectangle extends CanvasElement {
     this.canvas.stroke();
   }
 }
+
+export default Rectangle;
