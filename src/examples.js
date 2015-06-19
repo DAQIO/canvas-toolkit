@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import {Text, Canvas, Line, Rectangle} from '.';
+import {Text, Canvas, Line, Rectangle, Triangle} from '.';
 
 function randomColor(){
   return '#'+Math.floor(Math.random()*16777215).toString(16);
@@ -169,9 +169,70 @@ class Examples {
       });
     }, 20);
   }
+
+  oneTriangle(){
+    const triangle = new Triangle({
+      left: 100,
+      top: 100,
+      width: 10,
+      height: 50,
+      fill: true,
+      fillColor: randomColor(),
+      stroke: true,
+      strokeColor: randomColor(),
+      strokeThickness: 2,
+      rotate: 0
+    });
+    this.canvas.add(triangle);
+    setInterval(() => {
+      triangle.rotate += 1;
+    }, 10);
+  }
+
+  manyTriangles(){
+    const triangles = [];
+    for(let i = 0; i < 100; i++){
+      let fill = false;
+      let stroke = false;
+      let inverted = false;
+      let choice = Math.random();
+      if(choice > 0.9){
+        fill = true;
+        stroke = true;
+        inverted = true;
+      } else if(choice > 0.50){
+        fill = false;
+        stroke = true;
+        inverted = true;
+      } else {
+        fill = true;
+        inverted = false;
+      }
+      const triangle = new Triangle({
+        left: Math.random() * 750,
+        top: Math.random() * 400,
+        width: Math.random() * 50 + 10,
+        height: Math.random() * 25 + 10,
+        fill: fill,
+        fillColor: randomColor(),
+        stroke: true,
+        strokeColor: randomColor(),
+        strokeThickness: Math.random() * 10,
+        rotate: Math.random() * 360
+      });
+      triangles.push(triangle);
+      this.canvas.add(triangle);
+    }
+    setInterval(()=>{
+      _.each(triangles, (triangle) => {
+        triangle.left += 1;
+        triangle.left = triangle.left % this.canvas.width;
+      });
+    }, 20);
+  }
 }
 
 window.addEventListener('load', function(){
   var examples = new Examples();
-  examples.manyRectangles();
+  examples.manyTriangles();
 });

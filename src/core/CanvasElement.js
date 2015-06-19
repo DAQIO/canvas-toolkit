@@ -20,7 +20,9 @@ class CanvasElement {
 
   drawTo(canvas){
     this.canvas = canvas;
+    this.canvas.save();
     this.draw(canvas);
+    this.canvas.restore();
     this.canvas = undefined;
     this.isDirty = false;
   }

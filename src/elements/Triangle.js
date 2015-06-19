@@ -1,25 +1,54 @@
+import _ from 'underscore';
 import CanvasElement from '../core/CanvasElement';
 import {RedrawProperties} from '../core/util';
 
-@RedrawProperties(['color', 'inverted'])
+@RedrawProperties([
+  'stroke', 'strokeColor', 'strokeThickness',
+  'fill','fillColor', 'rotate'
+])
 class Triangle extends CanvasElement {
   constructor(options){
     super(options);
-    this.color = options.color || '#000';
-    this.inverted = options.inverted || false;
+
+    _.defaults(options, {
+      fill: true,
+      fillColor: '#000',
+      stroke: true,
+      strokeColor: '#000',
+      strokeThickness: 0,
+      rotate: 0
+    });
+
+    this.fill = options.fill;
+    this.fillColor = options.fillColor;
+
+    this.stroke = options.stroke;
+    this.strokeColor = options.strokeColor;
+    this.strokeThickness = options.strokeThickness;
+    this.rotate = options.rotate;
   }
 
   draw(){
-    this.canvas.fillStyle = this.color;
-    this.canvas.beginPath();
-    if(this.inverted){
-      this.canvas.rotate((Math.PI/180)*180);
+    this.canvas.translate(this.left, this.top);
+    if(this.rotate != 0){
+      this.canvas.rotate((Math.PI/180)*this.rotate);
     }
-    this.canvas.moveTo(x,y);
-    this.canvas.lineTo(x-this.width/2, y-this.height/2);
-    this.canvas.lineTo(x+this.width/2, y-this.height/2);
+    this.canvas.translate(-this.width/2, -this.height/2);
+    this.canvas.fillStyle = this.fillColor;
+    this.canvas.strokeStyle = this.strokeColor;
+    this.canvas.lineWidth = this.strokeThickness;
+    this.canvas.beginPath();
+    this.canvas.moveTo(0, 0);
+    this.canvas.lineTo(this.width, 0);
+    this.canvas.lineTo(this.width/2, this.height);
     this.canvas.closePath();
-    this.canvas.fill();
+    if(this.fill){
+      this.canvas.fill();
+    }
+    if(this.stroke){
+      this.canvas.stroke();
+    }
+
   }
 }
 
