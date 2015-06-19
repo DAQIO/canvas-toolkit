@@ -11,10 +11,20 @@ var fs = require('fs');
 gulp.task('watch', function(){
   function build(){
     browserify('src/index.js', {debug:true})
-        .transform(babelify)
+        .transform(babelify.configure({
+          stage:0
+        }))
         .bundle()
         .on('error', gutil.log)
         .pipe(fs.createWriteStream('./build/bundle.js'));
+
+    browserify('src/examples.js', {debug:true})
+        .transform(babelify.configure({
+          stage:0
+        }))
+        .bundle()
+        .on('error', gutil.log)
+        .pipe(fs.createWriteStream('./build/examples.js'));
 
     watch('src/**/*.html')
         .pipe(gulp.dest('./build'))

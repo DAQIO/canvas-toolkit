@@ -1,6 +1,11 @@
 import _ from 'underscore';
+import {RedrawProperties} from './util';
 
+@RedrawProperties([
+  'left', 'top','width','height'
+])
 class CanvasElement {
+
   constructor(options){
     options = _.defaults(options || {}, {
       left: 0,
@@ -9,6 +14,8 @@ class CanvasElement {
     this.isDirty = true;
     this.left = options.left;
     this.top = options.top;
+    this.width = options.width;
+    this.height = options.height;
   }
 
   drawTo(canvas){
@@ -16,24 +23,6 @@ class CanvasElement {
     this.draw(canvas);
     this.canvas = undefined;
     this.isDirty = false;
-  }
-
-  set left(coordinate){
-    this._left = coordinate;
-    this.isDirty = true;
-  }
-
-  get left(){
-    return this._left;
-  }
-
-  set top(coordinate){
-    this._top = coordinate;
-    this.isDirty = true;
-  }
-
-  get top(){
-    return this._top;
   }
 
 }

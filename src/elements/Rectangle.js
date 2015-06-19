@@ -1,24 +1,37 @@
+import _ from 'underscore';
 import CanvasElement from '../core/CanvasElement';
+import {RedrawProperties} from '../core/util';
 
+@RedrawProperties([
+  'stroke', 'strokeColor', 'strokeThickness',
+  'fill','fillColor'
+])
 class Rectangle extends CanvasElement {
   constructor(options){
-    super();
-    this.left = options.left;
-    this.top = options.top;
-    this.width = options.width;
-    this.height = options.height;
-    this.color = options.color || '#000';
-    this.thickness = options.thickness || 1;
-    this.fill = options.fill || false;
-    this.fillColor = options.fillColor || '#FFF';
+    super(options);
+
+    _.defaults(options, {
+      fill: true,
+      fillColor: '#000',
+      stroke: true,
+      strokeColor: '#000',
+      strokeThickness: 0
+    });
+
+    this.fill = options.fill;
+    this.fillColor = options.fillColor;
+
+    this.stroke = options.stroke;
+    this.strokeColor = options.strokeColor;
+    this.strokeThickness = options.strokeThickness;
   }
 
   draw(){
-    const left = this.left - this.thickness / 2;
-    const top = this.top - this.thickness / 2;
-    const width = this.width + this.thickness;
+    const left = this.left - this.strokeThickness / 2;
+    const top = this.top - this.strokeThickness / 2;
+    const width = this.width + this.strokeThickness;
     const right = left + width;
-    const bottom = top + this.height + this.thickness;
+    const bottom = top + this.height + this.strokeThickness;
 
     this.canvas.beginPath();
     this.canvas.moveTo(left, top);
@@ -26,10 +39,17 @@ class Rectangle extends CanvasElement {
     this.canvas.lineTo(right, bottom);
     this.canvas.lineTo(left, bottom);
     this.canvas.lineTo(left, top);
-    this.canvas.lineWidth = this.thickness;
-    this.canvas.strokeStyle = this.color;
+    this.canvas.lineWidth = this.strokeThickness;
+    this.canvas.strokeStyle = this.strokeColor;
+    this.canvas.fillStyle = this.fillColor;
     this.canvas.closePath();
-    this.canvas.stroke();
+    if(this.fill){
+      this.canvas.fill();
+    }
+    if(this.stroke){
+      this.canvas.stroke();
+    }
+
   }
 }
 

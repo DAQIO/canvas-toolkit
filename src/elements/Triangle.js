@@ -1,8 +1,10 @@
 import CanvasElement from '../core/CanvasElement';
+import {RedrawProperties} from '../core/util';
 
+@RedrawProperties(['color', 'inverted'])
 class Triangle extends CanvasElement {
   constructor(options){
-    super();
+    super(options);
     this.color = options.color || '#000';
     this.inverted = options.inverted || false;
   }

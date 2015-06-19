@@ -7,4 +7,23 @@ export function checkOptions(options, fields){
       throw `Missing "${f}"`
     }
   });
-}
+};
+
+
+export function RedrawProperties(propNames){
+  return function(klazz){
+    _.each(propNames, (propName) => {
+      Object.defineProperty(klazz.prototype, propName, {
+        get: function() {
+          return this['_'+propName];
+        },
+        set: function(value) {
+          this['_' + propName] = value;
+          this.isDirty = true;
+        },
+        enumerable: true,
+        configurable: true
+      });
+    });
+  };
+};

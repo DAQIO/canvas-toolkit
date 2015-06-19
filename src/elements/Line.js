@@ -1,6 +1,11 @@
 import CanvasElement from '../core/CanvasElement';
-import {checkOptions} from '../core/util';
+import {checkOptions, RedrawProperties} from '../core/util';
 
+@RedrawProperties([
+  'x1', 'x2', 'y1', 'y2',
+  'color', 'lineCap', 'dashed',
+  'dashSpacing', 'thickness'
+])
 class Line extends CanvasElement {
 
   constructor(options){
@@ -18,42 +23,6 @@ class Line extends CanvasElement {
     this.dashed = options.dashed || false;
     this.dashSpacing = options.dashSpacing || [10,5];
     this.thickness = options.thickness || 1;
-  }
-
-  get x1(){
-    return this._x1;
-  }
-
-  set x1(x1){
-    this._x1 = x1;
-    this.isDirty = true;
-  }
-
-  get x2(){
-    return this._x2;
-  }
-
-  set x2(x2){
-    this._x2 = x2;
-    this.isDirty = true;
-  }
-
-  get y1(){
-    return this._y1;
-  }
-
-  set y1(y1){
-    this._y1 = y1;
-    this.isDirty = true;
-  }
-
-  get y2(){
-    return this._y2;
-  }
-
-  set y2(y2){
-    this._y2 = y2;
-    this.isDirty = true;
   }
 
   draw(){
@@ -90,15 +59,18 @@ class Line extends CanvasElement {
     if(!da){
       da = [10,5];
     }
-    this.ctx.save();
+    this.canvas.save();
     const dx = (x2-x);
     const dy = (y2-y);
     const len = Math.sqrt(dx*dx + dy*dy);
     const rot = Math.atan2(dy, dx);
-    this.ctx.translate(x, y);
-    this.ctx.moveTo(0, 0);
-    this.ctx.rotate(rot);
-    this.ctx.beginPath();
+    this.canvas.strokeStyle = this.color;
+    this.canvas.lineCap = this.lineCap;
+    this.canvas.lineWidth = this.thickness;
+    this.canvas.translate(x, y);
+    this.canvas.moveTo(0, 0);
+    this.canvas.rotate(rot);
+    this.canvas.beginPath();
     const dc = da.length;
     let di = 0;
     let draw = true;
@@ -109,13 +81,14 @@ class Line extends CanvasElement {
         x = len;
       }
       if(draw){
-        this.ctx.lineTo(x, 0);
+        this.canvas.lineTo(x, 0);
       } else {
-        this.ctx.moveTo(x, 0);
+        this.canvas.moveTo(x, 0);
       }
       draw = !draw;
     }
-    this.ctx.restore();
+    this.canvas.stroke();
+    this.canvas.restore();
   }
 }
 
