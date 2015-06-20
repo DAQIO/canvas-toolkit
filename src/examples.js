@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import {Text, Canvas, Line, Rectangle, Triangle} from '.';
+import {Text, Canvas, Line, Rectangle, Triangle, Path} from '.';
 
 function randomColor(){
   return '#'+Math.floor(Math.random()*16777215).toString(16);
@@ -230,9 +230,47 @@ class Examples {
       });
     }, 20);
   }
+
+  manyPaths(){
+    const paths = [];
+    for(let i = 0; i < 100; i++){
+      const path = new Path({
+        left: Math.random() * 750,
+        top: Math.random() * 400,
+        fill: true,
+        fillColor: randomColor(),
+        stroke: true,
+        strokeColor: randomColor(),
+        strokeThickness: 2,
+        rotate: Math.random() * 360,
+        path: [
+          [
+            [0,0],
+            [10,10],
+            [40,20],
+            [50,-10],
+            [60,5]
+          ],
+          [
+            [10,0],
+            [20,10],
+            [30,0] 
+          ]
+        ]
+      });
+      paths.push(path);
+      this.canvas.add(path);
+    }
+    setInterval(() => {
+      _.each(paths, (path) => {
+        path.left += 1;
+        path.left = path.left % this.canvas.width;
+      });
+    }, 20);
+  }
 }
 
 window.addEventListener('load', function(){
   var examples = new Examples();
-  examples.manyTriangles();
+  examples.manyPaths();
 });
