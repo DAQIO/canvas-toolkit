@@ -1,20 +1,28 @@
 import _ from 'underscore';
-import {Text, Canvas, Line, Rectangle, Triangle, Path, Circle} from '.';
+import {Text, Canvas, Line, Rectangle, Triangle, Path, Circle, CompositeElement} from '.';
 
 function randomColor(){
   return '#'+Math.floor(Math.random()*16777215).toString(16);
 }
 
-class Examples {
+class Examples extends CompositeElement {
   constructor(){
-    this.canvas = new Canvas({
-      width: 750,
-      height: 500,
-      container: document.querySelector("#canvas")
-    });
+    super();
+    this._createCountTest();
+    this._createMultipleElements();
+    this._createLineTest();
+    this._createDashedLine();
+    this._createManyRectangles();
+    this._createOneTriangle();
+    this._createManyTriangles();
+    this._createManyPaths();
+    this._createManyCircles();
+    this._createProgressSemiCircle();
+    this._createSpinningSemiCircle();
   }
 
-  countTest(){
+  _createCountTest(){
+    const layer = this.createLayer();
     const counter = new Text({
       left: 100,
       top: 100,
@@ -25,14 +33,15 @@ class Examples {
         size: 44
       }
     });
-    this.canvas.add(counter);
+    layer.add(counter);
     let count = 0;
     setInterval(() => {
       counter.text = 'Count: ' + (count++);
     },10);
   }
 
-  multipleElements(){
+  _createMultipleElements(){
+    const layer = this.createLayer();
     const c1 = new Text({
       text: 'Counter 1: 0',
       left: 10,
@@ -43,8 +52,8 @@ class Examples {
       left: 10,
       top: 30
     });
-    this.canvas.add(c1);
-    this.canvas.add(c2);
+    layer.add(c1);
+    layer.add(c2);
     let count1 = 0;
     let count2 = 0;
     setInterval(() => {
@@ -55,7 +64,8 @@ class Examples {
     }, 10);
   }
 
-  lineTest(){
+  _createLineTest(){
+    const layer = this.createLayer();
     const backbone = new Line({
       top: 50,
       left: -50,
@@ -65,7 +75,7 @@ class Examples {
       y2: 400,
       color: '#a7c'
     });
-    this.canvas.add(backbone);
+    layer.add(backbone);
 
     const lines = [];
     for(let i = 0; i < 100; i++){
@@ -81,15 +91,15 @@ class Examples {
 
     _.each(lines, (line) => {
       line.rotator = 0;
-      this.canvas.add(line);
+      layer.add(line);
     });
 
     setInterval(() => {
-      backbone.x1 = (backbone.x1 + 0.5) % (this.canvas.width + 100);
+      backbone.x1 = (backbone.x1 + 0.5) % (this.width + 100);
       backbone.x2 = backbone.x1;
       _.each(lines, (line) => {
         line.rotator += Math.random() * 0.02;
-        line.x1 = (line.x1 + 0.5) % (this.canvas.width + 100);
+        line.x1 = (line.x1 + 0.5) % (this.width + 100);
         line.x2 = Math.cos(line.rotator) * 100 + line.x1;
         line.y2 = Math.sin(line.rotator) * 100;
       });
@@ -104,7 +114,8 @@ class Examples {
     },1000)
   }
 
-  dashedLine(){
+  _createDashedLine(){
+    const layer = this.createLayer();
     const dashedLine = new Line({
       left: 100,
       top: 100,
@@ -114,7 +125,7 @@ class Examples {
       y2: 500,
       dashed: true
     });
-    this.canvas.add(dashedLine);
+    layer.add(dashedLine);
 
     let red = Math.round(Math.random() * 255);
     let green = Math.round(Math.random() * 255);
@@ -134,7 +145,8 @@ class Examples {
     }, 50);
   }
 
-  manyRectangles(){
+  _createManyRectangles(){
+    const layer = this.createLayer();
     const rects = [];
     for(let i = 0; i < 100; i++){
       let fill = false;
@@ -160,17 +172,18 @@ class Examples {
         strokeThickness: Math.random() * 10
       });
       rects.push(rect);
-      this.canvas.add(rect);
+      layer.add(rect);
     }
     setInterval(()=>{
       _.each(rects, (rect) => {
         rect.left += 1;
-        rect.left = rect.left % this.canvas.width;
+        rect.left = rect.left % this.width;
       });
     }, 20);
   }
 
-  oneTriangle(){
+  _createOneTriangle(){
+    const layer = this.createLayer();
     const triangle = new Triangle({
       left: 100,
       top: 100,
@@ -183,13 +196,14 @@ class Examples {
       strokeThickness: 2,
       rotate: 0
     });
-    this.canvas.add(triangle);
+    layer.add(triangle);
     setInterval(() => {
       triangle.rotate += 1;
     }, 10);
   }
 
-  manyTriangles(){
+  _createManyTriangles(){
+    const layer = this.createLayer();
     const triangles = [];
     for(let i = 0; i < 100; i++){
       let fill = false;
@@ -221,17 +235,18 @@ class Examples {
         rotate: Math.random() * 360
       });
       triangles.push(triangle);
-      this.canvas.add(triangle);
+      layer.add(triangle);
     }
     setInterval(()=>{
       _.each(triangles, (triangle) => {
         triangle.left += 1;
-        triangle.left = triangle.left % this.canvas.width;
+        triangle.left = triangle.left % this.width;
       });
     }, 20);
   }
 
-  manyPaths(){
+  _createManyPaths(){
+    const layer = this.createLayer();
     const paths = [];
     for(let i = 0; i < 100; i++){
       const path = new Path({
@@ -259,17 +274,18 @@ class Examples {
         ]
       });
       paths.push(path);
-      this.canvas.add(path);
+      layer.add(path);
     }
     setInterval(() => {
       _.each(paths, (path) => {
         path.left += 1;
-        path.left = path.left % this.canvas.width;
+        path.left = path.left % this.width;
       });
     }, 20);
   }
 
-  manyCircles(){
+  _createManyCircles(){
+    const layer = this.createLayer();
     const circles = [];
     for(let i = 0; i < 1000; i++){
       const circle = new Circle({
@@ -285,17 +301,18 @@ class Examples {
         angle: Math.random() * 360
       });
       circles.push(circle);
-      this.canvas.add(circle);
+      layer.add(circle);
     }
     setInterval(() => {
       _.each(circles, (circle) => {
         circle.left += 1;
-        circle.left = circle.left % this.canvas.width;
+        circle.left = circle.left % this.width;
       });
     }, 20);
   }
 
-  progressSemiCircle(){
+  _createProgressSemiCircle(){
+    const layer = this.createLayer();
     const circle = new Circle({
       left: 100,
       top: 100,
@@ -307,15 +324,15 @@ class Examples {
       rotate: 0,
       angle: 0
     });
-    this.canvas.add(circle);
+    layer.add(circle);
     setInterval(() => {
       circle.angle += 1;
       circle.angle = circle.angle % 360;
     }, 20);
   }
 
-
-  spinningSemiCircle(){
+  _createSpinningSemiCircle(){
+    const layer = this.createLayer();
     const circle = new Circle({
       left: 100,
       top: 100,
@@ -327,7 +344,7 @@ class Examples {
       rotate: 0,
       angle: 180
     });
-    this.canvas.add(circle);
+    layer.add(circle);
     setInterval(()=>{
       circle.rotate += 1;
       circle.rotate = circle.rotate % 360;
@@ -336,8 +353,11 @@ class Examples {
 }
 
 window.addEventListener('load', function(){
+  this.canvas = new Canvas({
+    width: 750,
+    height: 500,
+    container: document.querySelector("#canvas")
+  });
   var examples = new Examples();
-  examples.manyCircles();
-  examples.progressSemiCircle();
-  examples.spinningSemiCircle();
+  this.canvas.add(examples);
 });

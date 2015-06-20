@@ -2,15 +2,14 @@ import _ from 'underscore';
 
 class Layer {
   constructor({width, height}){
+    this.canvasEl = document.createElement('canvas');
     this.width = width;
     this.height = height;
     this.elements = [];
-    this.canvasEl = document.createElement('canvas');
-    this.canvasEl.width = width;
-    this.canvasEl.height = height;
-    this.canvasEl.style.width = `${width}px`;
-    this.canvasEl.style.height = `${height}px`;
     this.canvas = this.canvasEl.getContext('2d');
+    this.canvasEl.style.position = 'absolute';
+    this.canvasEl.style.left = this.left + 'px';
+    this.canvasEl.style.top = this.top + 'px';
   }
 
   add(element){
@@ -31,6 +30,31 @@ class Layer {
     return _.any(this.elements, (el) => {
       return el.isDirty;
     });
+  }
+
+  get width(){
+    return this._width;
+  }
+
+  get height(){
+    return this._height;
+  }
+
+  set width(val){
+    this._width = val;
+    this._refreshCanvas();
+  }
+
+  set height(val){
+    this._height = val;
+    this._refreshCanvas();
+  }
+
+  _refreshCanvas(){
+    this.canvasEl.width = this._width;
+    this.canvasEl.height = this._height;
+    this.canvasEl.style.width = `${this._width}px`;
+    this.canvasEl.style.height = `${this._height}px`;
   }
 }
 
