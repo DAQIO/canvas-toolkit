@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import {Text, Canvas, Line, Rectangle, Triangle, Path} from '.';
+import {Text, Canvas, Line, Rectangle, Triangle, Path, Circle} from '.';
 
 function randomColor(){
   return '#'+Math.floor(Math.random()*16777215).toString(16);
@@ -254,7 +254,7 @@ class Examples {
           [
             [10,0],
             [20,10],
-            [30,0] 
+            [30,0]
           ]
         ]
       });
@@ -268,9 +268,76 @@ class Examples {
       });
     }, 20);
   }
+
+  manyCircles(){
+    const circles = [];
+    for(let i = 0; i < 1000; i++){
+      const circle = new Circle({
+        left: Math.random() * 750,
+        top: Math.random() * 400,
+        fill: Math.random() > 0.5,
+        fillColor: randomColor(),
+        stroke: Math.random() > 0.5,
+        strokeColor: randomColor(),
+        strokeThickness: Math.random() * 5,
+        radius: Math.random() * 20,
+        rotate: Math.random() * 360,
+        angle: Math.random() * 360
+      });
+      circles.push(circle);
+      this.canvas.add(circle);
+    }
+    setInterval(() => {
+      _.each(circles, (circle) => {
+        circle.left += 1;
+        circle.left = circle.left % this.canvas.width;
+      });
+    }, 20);
+  }
+
+  progressSemiCircle(){
+    const circle = new Circle({
+      left: 100,
+      top: 100,
+      fill: false,
+      stroke: true,
+      strokeColor: 'red',
+      strokeThickness: 10,
+      radius: 50,
+      rotate: 0,
+      angle: 0
+    });
+    this.canvas.add(circle);
+    setInterval(() => {
+      circle.angle += 1;
+      circle.angle = circle.angle % 360;
+    }, 20);
+  }
+
+
+  spinningSemiCircle(){
+    const circle = new Circle({
+      left: 100,
+      top: 100,
+      fill: false,
+      stroke: true,
+      strokeColor: 'blue',
+      strokeThickness: 10,
+      radius: 50,
+      rotate: 0,
+      angle: 180
+    });
+    this.canvas.add(circle);
+    setInterval(()=>{
+      circle.rotate += 1;
+      circle.rotate = circle.rotate % 360;
+    }, 20);
+  }
 }
 
 window.addEventListener('load', function(){
   var examples = new Examples();
-  examples.manyPaths();
+  examples.manyCircles();
+  examples.progressSemiCircle();
+  examples.spinningSemiCircle();
 });
