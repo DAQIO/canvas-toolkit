@@ -7,6 +7,12 @@ class CompositeElement {
     this.layers = [];
   }
 
+  draw(){
+    _.each(this.layers, (layer) => {
+      layer.draw();
+    });
+  }
+
   createLayer(){
     const layer = new Layer({
       width:this.width,

@@ -8,6 +8,7 @@
   },
   "main" : "build/index.js",
   "files" : ["build"],
+  "license" : "MIT",
   "scripts" : {
     "prepublish" : "gulp build"
   },
@@ -19,8 +20,7 @@
     "gulp-watch" : "^4.2.4",
     "require-dir" : "^0.1.0",
     "gulp-webserver" : "^0.9.1",
-    "browserify" : "^10.2.4",
-    "babelify" : "^6.1.2"
+    "browserify" : "^10.2.4"
   },
   "dependencies" : {
     "underscore" : "^1.8.2",

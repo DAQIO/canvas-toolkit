@@ -14,10 +14,8 @@ class Canvas {
     const drawLoop = () => {
       this.defaultLayer.draw();
       _.each(this.composites, (composite)=>{
-        _.each(composite.layers, (layer) => {
-          layer.draw();
-        });
-      })
+        composite.draw();
+      });
       window.requestAnimationFrame(drawLoop);
     };
 
