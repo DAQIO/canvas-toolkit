@@ -35,7 +35,6 @@ class Circle extends CanvasElement {
   }
 
   draw(){
-    this.canvas.translate(this.left, this.top);
     if(this.rotate != 0){
       this.canvas.rotate((Math.PI/180)*this.rotate);
     }

@@ -25,13 +25,12 @@ gulp.task('watch', function(){
         .bundle()
         .on('error', gutil.log)
         .pipe(fs.createWriteStream('./build/examples.js'));
-
-    watch('src/**/*.html')
-        .pipe(gulp.dest('./build'))
-        .on('error', gutil.log);
   }
   build();
   watch('src/**/*.js', build);
+  watch('src/**/*.html')
+      .pipe(gulp.dest('./build'))
+      .on('error', gutil.log);
   gulp.src('./build/')
       .pipe(webserver({
         livereload: true,

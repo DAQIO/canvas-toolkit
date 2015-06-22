@@ -38,8 +38,8 @@ class Line extends CanvasElement {
     this.canvas.lineWidth = this.thickness;
     this.canvas.strokeStyle = this.color;
     this.canvas.lineCap = this.lineCap;
-    this.canvas.moveTo(this.x1 + this.left, this.y1 + this.top);
-    this.canvas.lineTo(this.x2 + this.left, this.y2 + this.top);
+    this.canvas.moveTo(this.x1, this.y1);
+    this.canvas.lineTo(this.x2, this.y2);
     this.canvas.stroke();
   }
 

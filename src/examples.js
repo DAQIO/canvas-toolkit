@@ -24,7 +24,7 @@ class Examples extends LayeredElement {
   _createCountTest(){
     const layer = this.createLayer();
     const counter = new Text({
-      left: 100,
+      left: 200,
       top: 100,
       text: 'Count: 0',
       color: 'red',
@@ -44,12 +44,12 @@ class Examples extends LayeredElement {
     const layer = this.createLayer();
     const c1 = new Text({
       text: 'Counter 1: 0',
-      left: 10,
+      left: 50,
       top: 10
     });
     const c2 = new Text({
       text: 'Counter 2: 0',
-      left: 10,
+      left: 50,
       top: 30
     });
     layer.add(c1);
