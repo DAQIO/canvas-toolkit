@@ -28,7 +28,10 @@ class Text extends CanvasElement {
     this.canvas.fillStyle = this.color;
     this.canvas.textAlign = 'left';
     this.canvas.textBaseline = 'top';
-    this.canvas.fillText(this.text, this.left, this.top);
+    const measurement = this.canvas.measureText(this.text);
+    _.defaults(measurement, {width: 0, height: 0});
+    console.log("Measurement", measurement);
+    this.canvas.fillText(this.text, this.left - measurement.width / 2, this.top - measurement.height / 2);
   }
 }
 
