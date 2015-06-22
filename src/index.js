@@ -6,7 +6,7 @@ import Circle from './elements/Circle';
 import Triangle from './elements/Triangle';
 import Canvas from './core/Canvas';
 import CanvasElement from './core/CanvasElement';
-import CompositeElement from './core/CompositeElement';
+import LayeredElement from './core/LayeredElement';
 
 const CanvasToolkit = {
   Path,
@@ -17,7 +17,7 @@ const CanvasToolkit = {
   Circle,
   Canvas,
   CanvasElement,
-  CompositeElement
+  LayeredElement
 };
 
 window.CanvasToolkit = CanvasToolkit;

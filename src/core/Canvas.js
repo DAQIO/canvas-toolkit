@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import Layer from './Layer';
-import CompositeElement from './CompositeElement';
+import LayeredElement from './LayeredElement';
 import CanvasElement from './CanvasElement';
 
 class Canvas {
@@ -33,7 +33,7 @@ class Canvas {
   }
 
   add(element){
-    if(element instanceof CompositeElement){
+    if(element instanceof LayeredElement){
       element.width = this.width;
       element.height = this.height;
       this.composites.push(element);

@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import Layer from './Layer';
 
-class CompositeElement {
+class LayeredElement {
 
   constructor(){
     this.layers = [];
@@ -45,4 +45,4 @@ class CompositeElement {
   }
 }
 
-export default CompositeElement;
+export default LayeredElement;

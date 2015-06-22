@@ -1,11 +1,11 @@
 import _ from 'underscore';
-import {Text, Canvas, Line, Rectangle, Triangle, Path, Circle, CompositeElement} from '.';
+import {Text, Canvas, Line, Rectangle, Triangle, Path, Circle, LayeredElement} from '.';
 
 function randomColor(){
   return '#'+Math.floor(Math.random()*16777215).toString(16);
 }
 
-class Examples extends CompositeElement {
+class Examples extends LayeredElement {
   constructor(){
     super();
     this._createCountTest();
