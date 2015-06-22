@@ -16,9 +16,13 @@ class Layer {
     this.elements.push(element);
   }
 
+  clear(){
+    this.elements = [];
+    this.canvas.clearRect(0,0,this.width, this.height);
+  }
+
   draw(){
     if(this._elementsAreDirty()){
-      console.log("REDRAW");
       this.canvas.clearRect(0,0,this.width,this.height);
       _.each(this.elements, (element)=>{
         element.drawTo(this.canvas);

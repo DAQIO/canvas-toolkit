@@ -16,7 +16,7 @@ class Triangle extends CanvasElement {
       stroke: true,
       strokeColor: '#000',
       strokeThickness: 0,
-      rotate: 0
+      rotate: 180
     });
 
     this.fill = options.fill;
@@ -38,9 +38,9 @@ class Triangle extends CanvasElement {
     this.canvas.strokeStyle = this.strokeColor;
     this.canvas.lineWidth = this.strokeThickness;
     this.canvas.beginPath();
-    this.canvas.moveTo(0, 0);
-    this.canvas.lineTo(this.width, 0);
-    this.canvas.lineTo(this.width/2, this.height);
+    this.canvas.moveTo(this.strokeThickness/2, this.strokeThickness/2);
+    this.canvas.lineTo(this.width-this.strokeThickness/2, this.strokeThickness/2);
+    this.canvas.lineTo(this.width/2, this.height-this.strokeThickness/2);
     this.canvas.closePath();
     if(this.fill){
       this.canvas.fill();

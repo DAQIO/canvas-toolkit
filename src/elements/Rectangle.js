@@ -27,11 +27,12 @@ class Rectangle extends CanvasElement {
   }
 
   draw(){
-    const left = this.left - this.strokeThickness / 2;
-    const top = this.top - this.strokeThickness / 2;
-    const width = this.width + this.strokeThickness;
+    console.log("Draw Rectangle", this.left, this.top);
+    const left = this.left + this.strokeThickness / 2;
+    const top = this.top + this.strokeThickness / 2;
+    const width = this.width - this.strokeThickness;
     const right = left + width;
-    const bottom = top + this.height + this.strokeThickness;
+    const bottom = top + this.height - this.strokeThickness;
 
     this.canvas.beginPath();
     this.canvas.moveTo(left, top);

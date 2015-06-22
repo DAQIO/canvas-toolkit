@@ -21,7 +21,7 @@ class Circle extends CanvasElement {
       strokeThickness: 0,
       radius: 10,
       rotate: 0,
-      angle: 0
+      angle: 360
     });
 
     this.fill = options.fill;
