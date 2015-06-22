@@ -29,9 +29,6 @@ class Triangle extends CanvasElement {
   }
 
   draw(){
-    if(this.rotate != 0){
-      this.canvas.rotate((Math.PI/180)*this.rotate);
-    }
     this.canvas.translate(-this.width/2, -this.height/2);
     this.canvas.fillStyle = this.fillColor;
     this.canvas.strokeStyle = this.strokeColor;

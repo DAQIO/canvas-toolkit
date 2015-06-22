@@ -5,7 +5,7 @@ import {checkOptions, RedrawProperties} from '../core/util';
 @RedrawProperties([
   'left', 'top', 'fill',
   'fillColor', 'stroke', 'strokeColor',
-  'strokeThickness', 'radius', 'rotate',
+  'strokeThickness', 'radius',
   'angle'
 ])
 class Circle extends CanvasElement {
@@ -35,9 +35,6 @@ class Circle extends CanvasElement {
   }
 
   draw(){
-    if(this.rotate != 0){
-      this.canvas.rotate((Math.PI/180)*this.rotate);
-    }
     this.canvas.translate(-this.radius/2, -this.radius/2);
     this.canvas.lineWidth = this.strokeThickness;
     this.canvas.strokeStyle = this.strokeColor;

@@ -31,9 +31,6 @@ class Path extends CanvasElement {
   }
 
   draw(){
-    if(this.rotate != 0){
-      this.canvas.rotate((Math.PI/180)*this.rotate);
-    }
     this.canvas.lineWidth = this.strokeThickness;
     this.canvas.strokeStyle = this.strokeColor;
     this.canvas.fillStyle = this.fillColor;
