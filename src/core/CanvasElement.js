@@ -22,7 +22,6 @@ class CanvasElement {
   draw(){
     _.each(this.children, (child) => {
       this.canvas.save();
-      this.canvas.translate(this.left, this.top);
       child.drawTo(this.canvas);
       this.canvas.restore();
     });
