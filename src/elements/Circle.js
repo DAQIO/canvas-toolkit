@@ -6,7 +6,7 @@ import {checkOptions, RedrawProperties} from '../core/util';
   'left', 'top', 'fill',
   'fillColor', 'stroke', 'strokeColor',
   'strokeThickness', 'radius',
-  'angle'
+  'angle', 'lineCap'
 ])
 class Circle extends CanvasElement {
 
@@ -21,7 +21,8 @@ class Circle extends CanvasElement {
       strokeThickness: 0,
       radius: 10,
       rotate: 0,
-      angle: 360
+      angle: 360,
+      lineCap: 'square'
     });
 
     this.fill = options.fill;
@@ -32,6 +33,7 @@ class Circle extends CanvasElement {
     this.radius = options.radius;
     this.rotate = options.rotate;
     this.angle = options.angle;
+    this.lineCap = options.lineCap;
   }
 
   draw(){
@@ -39,6 +41,7 @@ class Circle extends CanvasElement {
     this.canvas.lineWidth = this.strokeThickness;
     this.canvas.strokeStyle = this.strokeColor;
     this.canvas.fillStyle = this.fillColor;
+    this.canvas.lineCap = this.lineCap;
 
     this.canvas.beginPath();
     const angle = this.angle * (Math.PI/180);
