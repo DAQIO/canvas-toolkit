@@ -25,6 +25,10 @@ gulp.task('watch', function(){
         .bundle()
         .on('error', gutil.log)
         .pipe(fs.createWriteStream('./build/examples.js'));
+
+    gulp.src('src/**/*.html')
+        .pipe(gulp.dest('./build'))
+        .on('error', gutil.log);
   }
   build();
   watch('src/**/*.js', build);
