@@ -22,7 +22,7 @@ class Circle extends CanvasElement {
       radius: 10,
       rotate: 0,
       angle: 360,
-      lineCap: 'square'
+      lineCap: 'butt'
     });
 
     this.fill = options.fill;
