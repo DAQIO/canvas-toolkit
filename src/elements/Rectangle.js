@@ -27,7 +27,6 @@ class Rectangle extends CanvasElement {
   }
 
   draw(){
-    console.log("Draw Rectangle", this.left, this.top);
     const left = this.strokeThickness / 2;
     const top = this.strokeThickness / 2;
     const width = this.width - this.strokeThickness;

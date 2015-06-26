@@ -7,6 +7,7 @@ import Triangle from './elements/Triangle';
 import Canvas from './core/Canvas';
 import CanvasElement from './core/CanvasElement';
 import LayeredElement from './core/LayeredElement';
+import {RedrawProperties} from './core/util';
 
 const CanvasToolkit = {
   Path,
@@ -17,7 +18,8 @@ const CanvasToolkit = {
   Circle,
   Canvas,
   CanvasElement,
-  LayeredElement
+  LayeredElement,
+  RedrawProperties
 };
 
 window.CanvasToolkit = CanvasToolkit;
