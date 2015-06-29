@@ -4,7 +4,7 @@ import {RedrawProperties} from '../core/util';
 
 @RedrawProperties([
   'stroke', 'strokeColor', 'strokeThickness',
-  'fill','fillColor'
+  'fill','fillColor', 'lineCap'
 ])
 class Rectangle extends CanvasElement {
   constructor(options){
@@ -15,8 +15,11 @@ class Rectangle extends CanvasElement {
       fillColor: '#000',
       stroke: true,
       strokeColor: '#000',
-      strokeThickness: 0
+      strokeThickness: 0,
+      lineCap: 'butt'
     });
+
+    this.lineCap = options.lineCap;
 
     this.fill = options.fill;
     this.fillColor = options.fillColor;
@@ -39,6 +42,7 @@ class Rectangle extends CanvasElement {
     this.canvas.lineTo(right, bottom);
     this.canvas.lineTo(left, bottom);
     this.canvas.lineTo(left, top);
+    this.canvas.lineCap = this.lineCap;
     this.canvas.lineWidth = this.strokeThickness;
     this.canvas.strokeStyle = this.strokeColor;
     this.canvas.fillStyle = this.fillColor;

@@ -4,28 +4,26 @@ import {checkOptions, RedrawProperties} from '../core/util';
 import {standardFont} from '../core/defaults';
 
 @RedrawProperties([
-  'font', 'text', 'color'
+  'font', 'text'
 ])
 class Text extends CanvasElement {
 
   constructor(options){
     super(options);
     options = _.defaults(_.clone(options), {
-      font: standardFont,
-      color: '#000'
+      font: standardFont
     });
     checkOptions(options, ['text']);
     this.font = options.font;
     this.text = options.text;
-    this.color = options.color;
   }
 
   draw(){
-    let {style,weight,size,family} = this.font;
+    let {style,weight,size,family,color} = this.font;
     style = style || "normal";
     weight = weight || "normal";
     this.canvas.font = `${style} ${weight} ${size}px "${family}"`
-    this.canvas.fillStyle = this.color;
+    this.canvas.fillStyle = color;
     this.canvas.textAlign = 'left';
     this.canvas.textBaseline = 'top';
     const measurement = this.canvas.measureText(this.text);
