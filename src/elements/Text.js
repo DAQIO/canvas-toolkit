@@ -3,6 +3,8 @@ import CanvasElement from '../core/CanvasElement';
 import {checkOptions, RedrawProperties} from '../core/util';
 import {standardFont} from '../core/defaults';
 
+const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
 @RedrawProperties([
   'font', 'text'
 ])
@@ -28,7 +30,11 @@ class Text extends CanvasElement {
     this.canvas.textBaseline = 'top';
     const measurement = this.canvas.measureText(this.text);
     _.defaults(measurement, {width: 0, height: 0});
-    this.canvas.fillText(this.text, - measurement.width / 2, - measurement.height / 2);
+    if(isFirefox){
+      this.canvas.fillText(this.text, - measurement.width / 2, size / 4);
+    } else {
+      this.canvas.fillText(this.text, - measurement.width / 2, - measurement.height / 2);
+    }
   }
 }
 
